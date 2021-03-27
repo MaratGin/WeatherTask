@@ -16,8 +16,8 @@ public class FileWriter {
 
         File file= new File(path);
 
-        //File file1= new File(file.getParent()+"\\Result.txt"); Винда
-        File file1= new File(file.getParent()+"/Result.txt");
+        File file1= new File(file.getParent()+"\\Result.txt"); //Винда
+       // File file1= new File(file.getParent()+"/Result.txt"); MacOS
 
         if (!file1.exists()){
             file1.createNewFile();
