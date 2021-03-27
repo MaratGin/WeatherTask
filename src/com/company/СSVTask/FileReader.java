@@ -22,16 +22,19 @@ public class FileReader {
         List<String> fileLines = Files.readAllLines(Paths.get(path));
 
         String[] splitetr = new String[fileLines.size()];
-        //10 незначащих строк
+
         int k=0;
         int f=0;
 
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd'T'HHmm");
 
         for (String line:fileLines) {
-            if (k>10){
 
-                splitetr= line.split(",");
+            splitetr= line.split(",");
+
+            if (isWeather(splitetr)){
+
+
 //                for (int i = 0; i < splitetr.length ; i++) {
 //                    System.out.print(splitetr[i]+ ", ");
 //                }
@@ -43,29 +46,26 @@ public class FileReader {
                 Double windSpeed=Double.parseDouble(splitetr[3]);
                 Double  direction=Double.parseDouble(splitetr[4]);
                       CSV csv= new CSV(date,temperature,humidity,windSpeed,direction);
-//                csv.setDate(date);
-//                csv.setTemperature(temperature);
-//                csv.setHumidity(humidity);
-//                csv.setSpeed(windSpeed);
-//                csv.setDirection(direction);
                 list.add(f,csv);
                f=f+1;
 
             }
 
-
-            k++;
         }
       return list;
     }
 
-//    public String[] units() throws Exception {
-//        String path="H:\\Загрузки\\javatest1-master\\src\\com\\company\\Graph\\Graph\\src\\com\\company\\СSVTask\\dataexport_20210320T064822.csv";
-//        List<String> fileLines = Files.readAllLines(Paths.get(path));
-//        String[] units=fileLines.get(4).split(",");
-//
-//
-//        return units;
-//    }
+    public boolean isWeather(String[] line){
+        String first=line[0];
+        boolean answer;
+        char a=first.charAt(0);
+        if (a=='0'||a=='1'||a=='2'||a=='3'||a=='4'||a=='5'||a=='6'||a=='7'||a=='8'||a=='9'){
+            answer=true;
+        } else {
+            answer=false;
+        }
+        return answer;
+    }
+
 
 }
